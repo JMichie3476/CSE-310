@@ -1,0 +1,96 @@
+```{r}
+
+# This program will read in a public data repository on south American geothermal resources, and will run several tests using this data frame. For these tests I'll be acting like each was a task by a given employer who told a programmer to find out some specific information from the data.
+
+#Only need this for dyplyer functions
+library(tidyverse)
+
+
+# loading in the csv file and seeing it into the dataframe siply named df, please not that this code line is structured around my file paths, this data was from a free, open sourse site that I downloaded from. If these programs are going to run and test, then the call line to read the csv file from must be changed.
+df <- read.csv("/Users/kings/OneDrive/Documents/CSE 310/Module 1/lacgeothermalinventory.csv")
+
+# this prints the data frame to easily access any intended information.
+df
+
+```
+
+```{r}
+
+# This is a test of both the integer and numeric datatypes, print results for both given a hypathetical sceario using the dataframe. In this, the assignment is fined the toal number of vibale candadite sites listed as yes, and no, then finding the percent of viable sites from the total.
+
+#defining quick variables to count the number of yes and no statments
+yes_sum <- sum(df$Candidate.Site. == "Yes")
+No_sum <- sum(df$Candidate.Site. == "No")
+
+#messege to report the total yes and no statments
+message("The sum of viable Candidate sites is: ",yes_sum)
+message("The sum of non Viable Candidate sits is: ", No_sum)
+
+# for a quick integer test, we can say they want an percent of viable sites get a quick calculation.
+
+# quick calculation to add both statments to get a toal amount of sites
+total <- yes_sum + No_sum
+# divided the total number of Yes replies over the total sites to get a percentage
+per <- yes_sum/total
+
+result <- per*100
+
+#small print statment to look better
+message("the precent of Viable sites is: ",result,"%")
+
+# The resuts are printed down here, the first two are integer types, being whole numbers without decimals. The thrid result is our numeric datatype, the percent of viable sites.
+```
+
+```{r}
+
+# this will be the Character datatype test and the while loop, lets say whoever the client is wanted a list of project names in Chile.
+
+#For loop set to go along the Country column
+for (i in seq_along(df$Country)){
+  #if statment to print the project Name when the Country charact string is Chile
+  if (df$Country[i] == "Chile"){
+    print(df$Project.Name[i])
+  }
+}
+```
+
+```{r}
+
+# for this final test for raw datatypes, lets say we were asked to convert some commonly used site ID's into raw data to help streamline some indexing project. 
+
+
+# conversion of LAC002
+Raw_1 <- df$Site.ID[1]
+convert_1 <- charToRaw(Raw_1)
+                       
+# conversion of LAC001
+Raw_2 <- df$Site.ID[2]
+convert_2 <- charToRaw(Raw_2)
+
+# conversion of LAC003
+Raw_3 <- df$Site.ID[4]
+convert_3 <- charToRaw(Raw_3)
+
+#print statement for the converted id's
+message("Site ID LAC001 coverted to raw dataype is: ", convert_2)
+message("Site ID LAC002 coverted to raw dataype is: ", convert_1)
+message("Site ID LAC003 coverted to raw dataype is: ", convert_3)
+
+```
+
+```{r}
+
+# This final test will be for testing logical returns, unfortunately, the original authors of csv listed everything as a character data type, even the yes and now areas of candidate site. Still, The Yes and no of candidate sites can operate like a logical data type, so we'll use a Boolean operator for the string. Let’s assume that the project here is to find all region names of viable sites.
+
+# Repurposing the for loop for the character test and having it look through the Country variable. no real reason for this specifically, we just need a column to run through all rows listed as a viable site, this could still work if we did this by Project name.
+
+for (i in seq_along(df$Country)){
+  # this time, instead of a specific string, were running through a list of Yes an no and printing the project name for yes.
+  if (df$Candidate.Site.[i] == "Yes"){
+    print(df$Project.Name[i])
+  }
+}
+
+#Techniccly, this is a character test, as the Yes and now aren’t specific binary returns. However, the column could be easily filled with a simple conversion function, but I held off on that because, frankly it wasn't needed, this code uses a Boolean operator to sort through a list of binary strings, it is a logical argument in nature, but not raw.
+
+```
