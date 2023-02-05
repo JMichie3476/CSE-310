@@ -1,0 +1,107 @@
+---
+title: "Module_2_Data_Analysis"
+author: "Jacob Michie"
+format: html
+editor: visual
+---
+
+```{r}
+
+# Libraries
+library(tidyverse)
+
+#setting dataframe from csv file, The file is of world wide statistics on diffrent statistics relevent to a counties goverment stability.
+data <- read.csv("C:/Users/kings/OneDrive/Documents/CSE 310/Module 2/WGI_csv_WGI_Data.csv")
+
+data
+```
+
+```{r}
+# THis cell is to tidy the data into a workable data frame that we can use to narrow down what we need for the data
+
+#removing the indicator code column, we won't need it for the new data frame
+clean <- data[,-4]
+
+# setting up a tidy data frame and naming it clean
+tidy <- clean %>%
+  pivot_longer(!c(Country.Name,Country.Code,Indicator.Name), names_to = "Year", values_to = "Values") %>% 
+  separate(col = Year, into = c("extra", "year"), sep = 1) %>%
+  pivot_wider(names_from = Indicator.Name, values_from = Values) %>%
+  mutate_at(4, as.integer)
+
+# each year befor ewas listed with an X in the front, the tidy data above seperated each year from the x into a new column, and this erases that into a clean dataframe
+tidy2 <- tidy[,-3]
+
+tidy2
+```
+
+```{r}
+
+# changing the column names to make my life easier
+colnames(tidy2)[12] = "percent"
+colnames(tidy2)[2] = "Code"
+
+# creating a speciic dataframe on all countries Goverment peffectivness precentail ranking in the year 2008
+ydata <- tidy2 %>%
+  filter(year == 2008) %>%
+  group_by(Country.Name,Code,percent) %>%
+  summarise(Country.Name,Code,percent)
+
+ydata
+
+```
+
+```{r}
+# filter out the countires for only a handfull of select countires
+asia <- ydata %>%
+  filter(Code == "AFG" | Code == "ARM" | Code == "AZE" | Code == "BHR" | Code == "BGD" | Code == "BTN" | Code == "IOT" | Code == "BRN" | Code == "KHM")
+
+#states new dataframe
+asia
+
+#Plots the tear dataframe into a bar chart
+ggplot(data = asia, mapping = aes(x = Country.Name, y = percent)) +
+  geom_bar(stat = "identity", fill = "maroon") + 
+  #scale_color_brewer(palette = "Set1") +
+  labs(
+    title = "Goverment effectivness by percentile per country in 2008",
+    y = "Government Effectiveness: Percentile Rank"
+  ) +
+  theme_classic() +
+  theme(
+    axis.title.x = element_blank()
+  )
+```
+
+```{r}
+# creates a new data frame of 5 counties over the entire timeframe of data
+cdata <- tidy2 %>%
+  filter(Code == "BRA" | Code == "CAN" | Code == "AUS" | Code == "MAR" | Code == "POL") %>%
+  group_by(Country.Name,Code,year,percent) %>%
+  summarise(Country.Name,Code,year,percent)
+
+cdata
+```
+
+```{r}
+
+#plots the new data frame, creating 5 lines for each country, seeing how each change over time and specified years
+ggplot(data = cdata) +
+  geom_line(mapping = aes(x = year, y = percent, color = Country.Name)) +
+  geom_point(mapping = aes(x = year, y = percent, color = Country.Name)) +
+  scale_x_continuous(breaks = c(1996,1998,2000,2002,2004,2006,2008,2008,2010,2012,2014)) +
+  labs(
+    title = "Goverment effectiveness of selected selected counties between 1996 to 2014",
+    color = "Countries",
+    x = "Years between 1996 to 201",
+    y = "Government Effectiveness: Percentile Rank"
+  ) +
+  scale_color_brewer(palette = "Set1") +
+  theme_classic() +
+  theme(
+    panel.grid.major.y = element_line(color = "grey80",linetype = 2),
+    panel.grid.minor.y = element_line(color = "grey80",linetype = 2) 
+  )
+```
+
+data Website : https://data.world/agriculture/worldwide-gov-indicators/workspace/project-summary?agentid=agriculture&datasetid=worldwide-gov-indicators
