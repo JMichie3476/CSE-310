@@ -23,7 +23,7 @@ Javascript of course, along with the lodash nodes library.
 {Make a list of websites that you found helpful in this project}
 
 - [Youtube/javascript tutorial for VS code](https://www.youtube.com/playlist?list=PLRAV69dS1uWTSu9cVg8jjXW8jndOYYJPP)
-- [Tackoverflow](https://stackoverflow.com/questions/5836833/create-an-array-with-random-values)
+- [Stackoverflow](https://stackoverflow.com/questions/5836833/create-an-array-with-random-values)
 
 # Future Work
 
