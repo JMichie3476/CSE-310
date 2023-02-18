@@ -22,8 +22,8 @@ Javascript of course, along with the lodash nodes library.
 
 {Make a list of websites that you found helpful in this project}
 
-- [Web Site Name](https://www.youtube.com/playlist?list=PLRAV69dS1uWTSu9cVg8jjXW8jndOYYJPP)
-- [Web Site Name](https://stackoverflow.com/questions/5836833/create-an-array-with-random-values)
+- [Youtube/javascript tutorial for VS code](https://www.youtube.com/playlist?list=PLRAV69dS1uWTSu9cVg8jjXW8jndOYYJPP)
+- [Tackoverflow](https://stackoverflow.com/questions/5836833/create-an-array-with-random-values)
 
 # Future Work
 
