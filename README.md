@@ -31,4 +31,4 @@ I used Erlang, with the OTP for some basic call libraries.
 {Make a list of things that you need to fix, improve, and add in the future.}
 * Item 1 - I;ve been sticking to basic functions so far for the last two language modules, as I didn't have the confidence to try anything to complex. I need to break out and become more confident to try more coplex programing.
 * Item 2 - I need to work on shorttening my videos, I'm way to nervous about missing any of my outputs that I run through way too much detail.
-* Item 3 - I need to try and set up a better repository system for these modules, I listed everything under this one repository, so no I have to keep changing the README.
+* Item 3 - I need to try and set up a better repository system for these modules, I listed everything under this one repository, so now I have to keep changing the README.
