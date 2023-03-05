@@ -27,4 +27,4 @@ function sum(array) {
 
 const e2 = [3,7,4,"a"];
 
-//console.log(sum(e2));
+console.log(sum(e2));
